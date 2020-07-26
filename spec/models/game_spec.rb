@@ -79,7 +79,6 @@ RSpec.describe Game, type: :model do
   end
 
   context '.status' do
-    # перед каждым тестом "завершаем игру"
     before(:each) do
       game_w_questions.finished_at = Time.now
       expect(game_w_questions.finished?).to be_truthy
