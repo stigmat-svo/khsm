@@ -106,12 +106,41 @@ RSpec.describe Game, type: :model do
     end
   end
 
-
   it ' .current_game_question' do
     expect(game_w_questions.current_game_question).to eq(game_w_questions.game_questions.first)
   end
 
   it ' .previous_level' do
     expect(game_w_questions.previous_level).to eq(-1)
+  end
+
+  context ' .answer_current_question!' do
+
+    let(:question) { game_w_questions.current_game_question }
+
+    it 'if correct answer' do
+      expect(game_w_questions.answer_current_question!(question.correct_answer_key)).to be_truthy
+      expect(game_w_questions.status).to eq(:in_progress)
+    end
+
+    it 'if incorrect answer' do
+      expect(game_w_questions.answer_current_question!(question.variants.key(question.question.answer2))).to be_falsey
+      expect(game_w_questions.status).to eq(:fail)
+    end
+
+    it 'if last question' do
+      15.times do
+        game_w_questions.answer_current_question!(question.correct_answer_key)
+      end
+      expect(game_w_questions.prize).to eq(1000000)
+      expect(game_w_questions.is_failed).to be false
+      expect(game_w_questions.status).to eq(:won)
+    end
+
+    it 'if time is gone' do
+      game_w_questions.created_at -= 35.minutes
+      expect(game_w_questions.answer_current_question!(question.correct_answer_key)).to be false
+      expect(game_w_questions.status).to eq(:timeout)
+    end
   end
 end
