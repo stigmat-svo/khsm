@@ -31,6 +31,10 @@ RSpec.describe GameQuestion, type: :model do
     end
   end
 
+  it 'correct .correct_answer_key' do
+    expect(game_question.correct_answer_key).to eq 'b'
+  end
+
   # help_hash у нас имеет такой формат:
   # {
   #   fifty_fifty: ['a', 'b'], # При использовании подсказски остались варианты a и b
