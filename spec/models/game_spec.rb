@@ -132,9 +132,9 @@ RSpec.describe Game, type: :model do
       15.times do
         game_w_questions.answer_current_question!(question.correct_answer_key)
       end
+      expect(game_w_questions.status).to eq(:won)
       expect(game_w_questions.prize).to eq(1000000)
       expect(game_w_questions.is_failed).to be false
-      expect(game_w_questions.status).to eq(:won)
     end
 
     it 'if time is gone' do
