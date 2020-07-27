@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+ruby '2.5.8'
 
 gem 'rails', '~> 4.2.10'
 
@@ -19,7 +19,8 @@ gem 'font-awesome-rails'
 gem 'russian'
 
 group :development, :test do
-  gem 'sqlite3', '~> 1.3.13'
+  gem 'sqlite3', '1.3.13'
+  gem 'sqlite3-static'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.4'
   gem 'factory_bot_rails'
@@ -33,6 +34,8 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg', '~> 0.20'
+  gem 'pg'
   gem 'rails_12factor'
 end
+
+gem 'tzinfo-data'

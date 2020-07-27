@@ -130,9 +130,10 @@ RSpec.describe Game, type: :model do
     end
 
     it 'if last question' do
-      15.times do
-        game_w_questions.answer_current_question!(question.correct_answer_key)
-      end
+      game_w_questions.current_level = Question::QUESTION_LEVELS.max
+      game_w_questions.answer_current_question!(question.correct_answer_key)
+      expect(game_w_questions.current_level).to eq(15)
+
       expect(game_w_questions.status).to eq(:won)
       expect(game_w_questions.prize).to eq(1000000)
       expect(game_w_questions.is_failed).to be false
