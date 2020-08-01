@@ -4,29 +4,11 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= content_for?(:title) ? yield(:title) : 'Хороший программист — счастливчик!' %></title>
+  <title><%= content_for?(:title) ? yield(:title) : 'Кто хочет стать миллионером?' %></title>
   <%= csrf_meta_tags %>
 
   <%= stylesheet_link_tag 'application', :media => 'all' %>
 
-  <!-- For third-generation iPad with high-resolution Retina display: -->
-  <!-- Size should be 144 x 144 pixels -->
-  <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
-
-  <!-- For iPhone with high-resolution Retina display: -->
-  <!-- Size should be 114 x 114 pixels -->
-  <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
-
-  <!-- For first- and second-generation iPad: -->
-  <!-- Size should be 72 x 72 pixels -->
-  <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
-
-  <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-  <!-- Size should be 57 x 57 pixels -->
-  <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
-
-  <!-- For all other devices -->
-  <!-- Size should be 32 x 32 pixels -->
   <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
   <%= javascript_include_tag 'application' %>
@@ -41,7 +23,7 @@
 
 <div class="navbar navbar-default navbar-static-top">
   <div class="container">
-    <%= link_to 'Billionaire', root_path, class: 'navbar-brand' %>
+    <%= link_to 'Кто хочет стать миллионером?', root_path, class: 'navbar-brand' %>
     <% if user_signed_in? %>
       <div class="navbar-form navbar-right">
 
@@ -77,7 +59,7 @@
   </div>
 
   <footer class="buffer-top-lg text-right">
-    <p>&copy; <%= link_to 'Хороший программист', 'http://bit.ly/1U2DVdI' %> 2016 &mdash; &infin;</p>
+    <p>&copy; <%= link_to 'Виталий Шелудько', 'http://stigmat-online.site/', target: 'blank' %> 2020 </p>
   </footer>
 </div>
 
