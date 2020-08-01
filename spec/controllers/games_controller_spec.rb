@@ -112,6 +112,18 @@ RSpec.describe GamesController, type: :controller do
       expect(flash.empty?).to be_truthy # удачный ответ не заполняет flash
     end
 
+    it 'answer is incorrect' do
+      question = game_w_questions.current_game_question
+      answers = question.variants.except(question.correct_answer_key)
+      answer = answers.keys.sample
+
+      put :answer, id: game_w_questions.id, letter: answer
+      game = assigns(:game)
+
+      expect(game.status).to eq(:fail)
+      expect(game.finished?).to be true
+    end
+
     it 'takes money' do
       # вручную поднимем уровень вопроса до выигрыша 200
       game_w_questions.update_attribute(:current_level, 2)
