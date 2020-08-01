@@ -109,7 +109,7 @@ RSpec.describe GamesController, type: :controller do
       expect(game.finished?).to be false
       expect(game.current_level).to be > 0
       expect(response).to redirect_to(game_path(game))
-      expect(flash.empty?).to be_truthy # удачный ответ не заполняет flash
+      expect(flash.empty?).to be true # удачный ответ не заполняет flash
     end
 
     it 'answer is incorrect' do
@@ -122,6 +122,8 @@ RSpec.describe GamesController, type: :controller do
 
       expect(game.status).to eq(:fail)
       expect(game.finished?).to be true
+      expect(response).to redirect_to(user_path(user))
+      expect(flash[:alert]).to be
     end
 
     it 'takes money' do
