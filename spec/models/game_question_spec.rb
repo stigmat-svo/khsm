@@ -35,6 +35,24 @@ RSpec.describe GameQuestion, type: :model do
     expect(game_question.correct_answer_key).to eq 'b'
   end
 
+  it 'correct .help_hash' do
+    # на фабрике у нас изначально хэш пустой
+    expect(game_question.help_hash).to eq({})
+
+    # добавляем пару ключей
+    game_question.help_hash[:some_key1] = 'blabla1'
+    game_question.help_hash['some_key2'] = 'blabla2'
+
+    # сохраняем модель и ожидаем сохранения хорошего
+    expect(game_question.save).to be true
+
+    # загрузим этот же вопрос из базы для чистоты эксперимента
+    gq = GameQuestion.find(game_question.id)
+
+    # проверяем новые значение хэша
+    expect(gq.help_hash).to eq({some_key1: 'blabla1', 'some_key2' => 'blabla2'})
+  end
+
   # help_hash у нас имеет такой формат:
   # {
   #   fifty_fifty: ['a', 'b'], # При использовании подсказски остались варианты a и b
@@ -53,6 +71,30 @@ RSpec.describe GameQuestion, type: :model do
 
       ah = game_question.help_hash[:audience_help]
       expect(ah.keys).to contain_exactly('a', 'b', 'c', 'd')
+    end
+
+    it 'correct fifty_fifty' do
+      expect(game_question.help_hash).not_to include(:fifty_fifty)
+      game_question.add_fifty_fifty
+
+      expect(game_question.help_hash).to include(:fifty_fifty)
+      ff = game_question.help_hash[:fifty_fifty]
+
+      expect(ff).to include('b')
+      expect(ff.size).to eq 2
+    end
+
+    it 'correct friend_call' do
+      friend_answer = (/считает, что это вариант [ABCD]?\z/)
+
+      expect(game_question.help_hash).not_to include(:friend_call)
+
+      game_question.add_friend_call
+
+      expect(game_question.help_hash).to include(:friend_call)
+
+      fc = game_question.help_hash[:friend_call]
+      expect(fc).to match(friend_answer)
     end
   end
 end
