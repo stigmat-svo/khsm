@@ -140,6 +140,21 @@ RSpec.describe GamesController, type: :controller do
       expect(response).to redirect_to(game_path(game))
     end
 
+    it 'uses fifty-fifty' do
+      expect(game_w_questions.current_game_question.help_hash[:fifty_fifty]).not_to be
+      expect(game_w_questions.fifty_fifty_used).to be false
+
+      put :help, id: game_w_questions.id, help_type: :fifty_fifty
+      game = assigns(:game)
+
+      expect(game.finished?).to be false
+      expect(game.fifty_fifty_used).to be true
+      expect(game.current_game_question.help_hash[:fifty_fifty]).to be
+      expect(game.current_game_question.help_hash[:fifty_fifty].size).to eq(2)
+      expect(game.current_game_question.help_hash[:fifty_fifty]).to include(game.current_game_question.correct_answer_key)
+      expect(response).to redirect_to(game_path(game))
+    end
+
     it 'takes money' do
       # вручную поднимем уровень вопроса до выигрыша 200
       game_w_questions.update_attribute(:current_level, 2)
