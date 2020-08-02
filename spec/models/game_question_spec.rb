@@ -85,7 +85,7 @@ RSpec.describe GameQuestion, type: :model do
     end
 
     it 'correct friend_call' do
-      friend_answer = (/считает, что это вариант [ABCD]?\z/)
+      friend_answer = /считает, что это вариант [ABCD]\z/
 
       expect(game_question.help_hash).not_to include(:friend_call)
 
