@@ -61,5 +61,5 @@ RSpec.configure do |config|
 end
 
 # Это нужно, чтобы капибара искала стили и js в правильном месте
-Capybara.asset_host = "http://localhost:3000"
+Capybara.asset_host = 'http://localhost:3000'
 

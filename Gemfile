@@ -24,13 +24,15 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
+end
 
+group :test do
   # Гем, который использует rspec, чтобы смотреть наш сайт
   gem 'capybara'
-
   # Гем, который позволяет смотреть, что видит capybara
   gem 'launchy'
 end
+
 
 group :production do
   gem 'pg', '~> 0.18'
