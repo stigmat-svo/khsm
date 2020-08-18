@@ -19,9 +19,7 @@ RSpec.feature 'Viewing another user profile', type: :feature do
     FactoryBot.create(:game, user: another_user, current_level: 2, prize: 100)
   ] }
 
-  before(:each) do
-    login_as user
-  end
+
 
   scenario 'profile view' do
     visit '/'
